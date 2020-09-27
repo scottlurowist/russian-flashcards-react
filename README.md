@@ -3,7 +3,7 @@
 This project is a port of an web application that I wrote for 
 [project 2](https://github.com/scottlurowist/russian_flashcards-web-app) of 
 [General Assembly's SEI program](https://generalassemb.ly/education/software-engineering-immersive/new-york-city).
-I chose to due Russian Flashcards because I speak Russian and have friends in Russia who
+I chose to do Russian Flashcards because I speak Russian and have friends in Russia who
 would like to use this app.
 
 One twist on the flashcards is that it is requires typing. I know as a language learning
