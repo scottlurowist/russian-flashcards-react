@@ -8,19 +8,39 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-import React from 'react';
-import './App.css';
+import React, { Component } from 'react';
 import { CyrillicKeyboard } from './components/cyrillic-keyboard/cyrillic-keyboard-component'
 
 
+import './App.css';
 
-function App() {
-  return (
-    <main>
-      <h1>Welcome To Russian Flashcards</h1>
-      <CyrillicKeyboard />
-    </main>
-  );
+
+
+
+class App extends Component {
+
+  constructor() {
+    super();
+
+    this.state = {
+      cyrillicInput: ''
+    };
+  };
+
+
+  render() {
+    return (
+      <main>
+        <h1>Welcome To Russian Flashcards</h1>
+        <input type="text" value={this.state.cyrillicInput}/>
+        <CyrillicKeyboard keyboardPressHandler={e => {
+              this.setState({cyrillicInput: this.state.cyrillicInput + e.target.textContent })
+            }
+          }
+        />
+      </main>
+    );
+  }
 }
 
 export default App;
