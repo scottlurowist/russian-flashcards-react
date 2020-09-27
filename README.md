@@ -1,68 +1,32 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Russian Flashcards React.js: Description
 
-## Available Scripts
+This project is a port of an web application that I wrote for 
+[project 2](https://github.com/scottlurowist/russian_flashcards-web-app) of 
+[General Assembly's SEI program](https://generalassemb.ly/education/software-engineering-immersive/new-york-city).
+I chose to due Russian Flashcards because I speak Russian and have friends in Russia who
+would like to use this app.
 
-In the project directory, you can run:
+One twist on the flashcards is that it is requires typing. I know as a language learning
+enthusiast that learning a language involves using as many senses as you can. So I require
+users to type either English or Russian rather than simply "flipping a card".
 
-### `yarn start`
+The port is from a web app using vanilla JavaScript,jQuery, SCSS, and HTML to React.js.
+You can read about my
+[design decisions](https://github.com/scottlurowist/russian_flashcards-web-app#readme) 
+with respect to the first project. I chose to deviate from the GA provided template and
+write my own MVC-light framework with a view state controller since the project requirements
+stated that the app must be an SPA. This app reflects how I would build an app under
+those General Assembly requirements, based upon my knowledge gained from a Masters in
+Computer Science and my real-world software development experience.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+With this port, I am free to do things the way that I would want to do them using React.js
+and React Bootstrap.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+The application communicates with a backend web API implemented with Express.js,
+Mongoose.js, MongoDB, and of course Node.js. I implemented the backend and it is deployed to Heroku.
 
-### `yarn test`
+### Technologies Directly Used
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- JavaScript
+- React.js using JSX and React Bootstrap
+- React.js scaffolding using "create-react-app"
