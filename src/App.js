@@ -27,17 +27,27 @@ class App extends Component {
     };
   };
 
+  
+  // A callback method passed to the Cyrillic keyboard component that
+  // sets the state that represents a Russian word typed by the keyboard.
+  // It takes a Cyrillic character and adds it as a suffix to the state
+  // representing that word.
+  //
+  // cyrillicCharacter - a Cyrillic character typed by the CyrillicKeyboard
+  //                     component.
+  // 
+  processKeyboardClick = cyrillicCharacter => {
+
+    this.setState({cyrillicInput: this.state.cyrillicInput + cyrillicCharacter});
+  }
+
 
   render() {
     return (
       <main>
         <h1>Welcome To Russian Flashcards</h1>
         <input type="text" value={this.state.cyrillicInput}/>
-        <CyrillicKeyboard keyboardPressHandler={e => {
-              this.setState({cyrillicInput: this.state.cyrillicInput + e.target.textContent })
-            }
-          }
-        />
+        <CyrillicKeyboard keyboardPressHandler={ this.processKeyboardClick } />
       </main>
     );
   }

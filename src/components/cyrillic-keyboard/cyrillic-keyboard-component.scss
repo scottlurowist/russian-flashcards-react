@@ -15,9 +15,10 @@
 
 // Styles the Cyrillic keyboard as a whole.
 .cyrillic-soft-keyboard {
-    border: .2rem solid $american-flag-red;
-    border-radius: 1rem; 
-    display: inline-block;     
+    // TODO: Scott - need to investiage how to make each div
+    // the appropriate size.
+    // border: .2rem solid $american-flag-red;
+    // border-radius: 1rem; 
     margin: 1.5rem;
     padding: 1rem;     
     text-align: center;
@@ -32,8 +33,6 @@
 
 // Styles each key of the Cyrillic keyboard.
 .cyrillic__button {
-    //background-color: $american-flag-red;
-    //color: $american-flag-white;
     font-size: 1rem;
     font-weight: bold;
     margin: .2rem;
@@ -42,7 +41,7 @@
     min-height: 2.5rem;
     min-width: 3.5rem;
 
-    // The enter key in Russian is 4 letters, so it needs to be
+    // The enter key in Russian, вход, is 4 letters, so it needs to be
     // wider.
     &.enter-key {
         max-width: 7rem;
