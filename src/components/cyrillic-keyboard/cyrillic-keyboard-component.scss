@@ -1,0 +1,50 @@
+/*******************************************************************************
+**
+** cyrillic-keyboard-component.scss
+**
+** Styling for the CyrillicKeyboard component.
+**
+*******************************************************************************/
+
+
+@import './variables';
+@import "~bootstrap/scss/bootstrap";
+
+
+
+
+// Styles the Cyrillic keyboard as a whole.
+.cyrillic-soft-keyboard {
+    // TODO: Scott - need to investiage how to make each div
+    // the appropriate size.
+    // border: .2rem solid $american-flag-red;
+    // border-radius: 1rem; 
+    margin: 1.5rem;
+    padding: 1rem;     
+    text-align: center;
+}
+
+// Styles a single row in the Cyrillic keyboard.
+.cyrillic-soft-keyboard-row {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+// Styles each key of the Cyrillic keyboard.
+.cyrillic__button {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: .2rem;
+    max-height: 2.5rem;
+    max-width: 3.5rem;
+    min-height: 2.5rem;
+    min-width: 3.5rem;
+
+    // The enter key in Russian, вход, is 4 letters, so it needs to be
+    // wider.
+    &.enter-key {
+        max-width: 7rem;
+        min-width: 5rem;        
+    }
+}

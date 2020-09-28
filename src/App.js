@@ -1,26 +1,56 @@
-import React from 'react';
-import logo from './logo.svg';
+////////////////////////////////////////////////////////////////////////////////
+//
+// App.js
+//
+// This defines the application component. It drives the Russian Flashcards
+// app.
+//
+////////////////////////////////////////////////////////////////////////////////
+
+
+import React, { Component } from 'react';
+import { CyrillicKeyboard } from './components/cyrillic-keyboard/cyrillic-keyboard-component'
+
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+
+class App extends Component {
+
+  constructor() {
+    super();
+
+    this.state = {
+      cyrillicInput: ''
+    };
+  };
+
+  
+  // A callback method passed to the Cyrillic keyboard component that
+  // sets the state that represents a Russian word typed by the keyboard.
+  // It takes a Cyrillic character and adds it as a suffix to the state
+  // representing that word.
+  //
+  // cyrillicCharacter - a Cyrillic character typed by the CyrillicKeyboard
+  //                     component.
+  // 
+  processKeyboardClick = cyrillicCharacter => {
+
+    this.setState({cyrillicInput: this.state.cyrillicInput + cyrillicCharacter});
+  }
+
+
+  render() {
+    return (
+      <main>
+        <h1>Welcome To Russian Flashcards</h1>
+        <input type="text" value={this.state.cyrillicInput}/>
+        <CyrillicKeyboard keyboardPressHandler={ this.processKeyboardClick } />
+      </main>
+    );
+  }
 }
 
 export default App;
