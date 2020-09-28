@@ -9,6 +9,7 @@
 
 
 import React, { Component } from 'react';
+import { InputField } from './components/input-field/input-field-component';
 import { CyrillicKeyboard } from './components/cyrillic-keyboard/cyrillic-keyboard-component'
 
 
@@ -46,7 +47,9 @@ class App extends Component {
     return (
       <main>
         <h1>Welcome To Russian Flashcards</h1>
-        <input type="text" value={this.state.cyrillicInput}/>
+        <InputField id="cyrillic-text" label="русский"
+                    type="text" placeholder="русский"
+                    value={this.state.cyrillicInput}/>
         <CyrillicKeyboard keyboardPressHandler={ this.processKeyboardClick } />
       </main>
     );
