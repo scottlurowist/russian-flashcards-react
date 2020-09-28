@@ -9,11 +9,11 @@
 
 
 import React, { Component } from 'react';
-import { InputField } from './components/input-field/input-field-component';
-import { CyrillicKeyboard } from './components/cyrillic-keyboard/cyrillic-keyboard-component'
+import InputField from './components/input-field/input-field-component';
+import CyrillicKeyboard from './components/cyrillic-keyboard/cyrillic-keyboard-component'
 
 
-import './App.css';
+import './App.scss';
 
 
 

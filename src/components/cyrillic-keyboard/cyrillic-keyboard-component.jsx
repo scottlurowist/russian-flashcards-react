@@ -32,7 +32,7 @@ import './cyrillic-keyboard-component.scss';
 // 
 // We are destructuring the props property.
 //
-export const CyrillicKeyboard = ({keyboardPressHandler}) => {
+const CyrillicKeyboard = ({keyboardPressHandler}) => {
 
     return (
         <div className="cyrillic-soft-keyboard">
@@ -149,3 +149,6 @@ export const CyrillicKeyboard = ({keyboardPressHandler}) => {
         </div> 
     );
 }
+
+
+export default CyrillicKeyboard;

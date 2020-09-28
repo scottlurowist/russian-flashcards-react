@@ -13,7 +13,9 @@ import React from 'react';
 import Form from 'react-bootstrap/Form';
 
 
-export const InputField = ({id, label, type, placeholder, value}) => {
+
+
+const InputField = ({id, label, type, placeholder, value}) => {
 
     return (
         <Form>
@@ -27,3 +29,5 @@ export const InputField = ({id, label, type, placeholder, value}) => {
     );
 };
 
+
+export default InputField;
