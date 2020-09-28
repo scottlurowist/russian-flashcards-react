@@ -9,8 +9,19 @@
 
 
 import React, { Component } from 'react';
-import InputField from './components/input-field/input-field-component';
-import CyrillicKeyboard from './components/cyrillic-keyboard/cyrillic-keyboard-component'
+import { Route } from 'react-router-dom'
+
+import StatusMessages from './components/status-messages/status-messages-component';
+import HomeView from './components/home-view/home-view-component';
+import SignupView from './components/signup-view/signup-view-component';
+import SigninView from './components/signin-view/signin-view-component';
+import OptionsView from './components/options-view/options-view-component';
+import CreateFlashcardView from './components/flashcards-views/create-flashcard-view-component';
+import DeleteFlashcardView from './components/flashcards-views/delete-flashcard-view-component';
+import UpdateFlashcardView from './components/flashcards-views/update-flashcard-view-component';
+import ViewFlashcardsView from './components/flashcards-views/view-flashcards-view-component';
+// import InputField from './components/input-field/input-field-component';
+// import CyrillicKeyboard from './components/cyrillic-keyboard/cyrillic-keyboard-component'
 
 
 import './App.scss';
@@ -46,12 +57,21 @@ class App extends Component {
   render() {
     return (
       <main>
-        <h1>Welcome To Russian Flashcards</h1>
+        <Route path='/' component={StatusMessages} />
+        <Route exact path='/' component={HomeView} />
+        <Route exact path='/signup' component={SignupView} />
+        <Route exact path='/signin' component={SigninView} />
+        <Route exact path='/options' component={OptionsView} />   
+        <Route exact path='/create-flashcard' component={CreateFlashcardView} />   
+        <Route exact path='/delete-flashcard' component={DeleteFlashcardView} />  
+        <Route exact path='/update-flashcard' component={UpdateFlashcardView} />  
+        <Route exact path='/view-flashcards' component={ViewFlashcardsView} />                                      
+        {/* <h1>Welcome To Russian Flashcards</h1>
         <InputField id="cyrillic-text" label="русский"
                     type="text" placeholder="русский"
                     value={this.state.cyrillicInput}/>
-        <CyrillicKeyboard keyboardPressHandler={ this.processKeyboardClick } />
-      </main>
+        <CyrillicKeyboard keyboardPressHandler={ this.processKeyboardClick } /> */}
+      </main>      
     );
   }
 }
