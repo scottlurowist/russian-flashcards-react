@@ -11,11 +11,17 @@
 import React from 'react';
 
 
-const HomeView = () => {
+
+
+const HomeView = (props) => {
 
     return(
 
-        <h3>Home View</h3>
+        <section>
+            <h3>Home View</h3>
+            <button onClick={() => props.history.push('/signup')}>Create Account</button>
+            <button onClick={() => props.history.push('/signin')}>Signin</button>            
+        </section>
     );
 }
 

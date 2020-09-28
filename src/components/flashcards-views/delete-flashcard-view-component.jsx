@@ -11,11 +11,14 @@
 import React from 'react';
 
 
-const DeleteFlashcardView = () => {
+const DeleteFlashcardView = (props) => {
 
     return(
 
-        <h3>Delete</h3>
+        <section>
+            <h3>Delete Flashcard</h3>
+            <button onClick={() => props.history.push('/options')}>Return</button>
+        </section>
     );
 }
 

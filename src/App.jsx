@@ -58,7 +58,7 @@ class App extends Component {
     return (
       <main>
         <Route path='/' component={StatusMessages} />
-        <Route exact path='/home' component={HomeView} />
+        <Route exact path='/' component={HomeView} />
         <Route exact path='/signup' component={SignupView} />
         <Route exact path='/signin' component={SigninView} />
         <Route exact path='/options' component={OptionsView} />   

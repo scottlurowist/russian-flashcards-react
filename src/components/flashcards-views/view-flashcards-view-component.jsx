@@ -11,11 +11,14 @@
 import React from 'react';
 
 
-const ViewFlashcardsView = () => {
+const ViewFlashcardsView = (props) => {
 
     return(
 
-        <h3>View Flashcards</h3>
+        <section>
+            <h3>View Flashcards</h3>
+            <button onClick={() => props.history.push('/options')}>Return</button>
+        </section>
     );
 }
 

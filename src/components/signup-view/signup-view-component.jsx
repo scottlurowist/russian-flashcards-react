@@ -11,11 +11,15 @@
 import React from 'react';
 
 
-const SignupView = () => {
+const SignupView = (props) => {
 
     return(
 
-        <h3>Signup To Russian Flashcards</h3>
+        <section>
+            <h3>Create account View</h3>
+            <button onClick={() => props.history.push('/signin')}>Create Account</button>
+            <button onClick={() => props.history.push('/')}>Return</button>            
+        </section>
     );
 }
 
