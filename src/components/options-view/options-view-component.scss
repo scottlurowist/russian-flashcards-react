@@ -1,0 +1,24 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+// optiions-view.component.scss
+//
+// Provides styling that is specific to the Russian Flashcards options view
+// component.
+//
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+.options__buttons {
+    button {
+        margin-top: 1rem;
+    }
+    .options__button--spaced-top {
+        margin-top: 3rem;
+    }
+
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}

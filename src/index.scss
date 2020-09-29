@@ -9,6 +9,7 @@
 
 @import './variables';
 
+
 // Override the Boostrap primary colors
 // These need to be set first before loading Bootstrap SCSS.
 $theme-colors: (
@@ -16,11 +17,18 @@ $theme-colors: (
   danger: $russian-flag-red
 );
 
+
 // Now we can import Bootstrap SCSS in order to override some defaults.
 @import "~bootstrap/scss/bootstrap";
 
 
 
+
+html {
+  // Set this explicitly so that we can use REM units.
+  // 1 REM is 18 pixels.
+  font-size: 18px;
+}
 
 body {
   margin: 0;

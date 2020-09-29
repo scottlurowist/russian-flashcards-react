@@ -9,18 +9,43 @@
 
 
 import React from 'react';
+import Button from 'react-bootstrap/Button';
+
+import './options-view-component.scss';
 
 
-const OptionsView = (props) => {
+
+// Implements the Options view.
+//
+// props
+const OptionsView = (routerProps) => {
 
     return(
-        <section>
-            <h3>Home View</h3>
-            <button onClick={() => props.history.push('/view-flashcards')}>View Flashcards</button>
-            <button onClick={() => props.history.push('/create-flashcard')}>Create Flashcard</button> 
-            <button onClick={() => props.history.push('/update-flashcard')}>Update Flashcard</button> 
-            <button onClick={() => props.history.push('/delete-flashcard')}>Delete Flashcard</button> 
-            <button onClick={() => props.history.push('/')}>Exit App</button>                                                
+        <section className="options__buttons">
+            <Button variant="primary"
+                    onClick={() => routerProps.history.push('/view-flashcards')}>
+                        View Flashcards / Просмотр карточек
+            </Button>
+            <Button variant="primary" className="options__button--spaced-top"
+                    onClick={() => routerProps.history.push('/create-flashcard')}>
+                        Create Flashcard / Создать карточку
+            </Button> 
+            <Button variant="primary"
+                    onClick={() => routerProps.history.push('/update-flashcard')}>
+                        Update Flashcard / Обновить карточку
+            </Button> 
+            <Button variant="primary"
+                    onClick={() => routerProps.history.push('/delete-flashcard')}>
+                        Delete Flashcard / Удалить карточк
+            </Button> 
+            <Button variant="primary" className="options__button--spaced-top"
+                    onClick={() => routerProps.history.push('/')}>
+                        Change Password / Изменить пароль
+            </Button>             
+            <Button variant="primary" className="options__button--spaced-top"
+                    onClick={() => routerProps.history.push('/')}>
+                        Exit / Выход  из программы
+            </Button>                                                
         </section>
     );
 }
