@@ -9,9 +9,12 @@
 
 
 import React, { Component } from 'react';
+import Button from 'react-bootstrap/Button';
 
 import InputField from '../input-field/input-field-component';
-import CyrillicKeyboard from '../cyrillic-keyboard/cyrillic-keyboard-component'
+import CyrillicKeyboard from '../cyrillic-keyboard/cyrillic-keyboard-component';
+
+import './flashcards-views.scss'
 
 
 
@@ -46,15 +49,26 @@ class CreateFlashcardView extends Component {
     render() {
         
         return (
-            <section>
-                <InputField id="create-english-text" label="English"
-                            type="text" placeholder="English" />                
-                <InputField id="create-cyrillic-text" label="русский"
-                            type="text" placeholder="русский"
-                            value={this.state.cyrillicInput}/>
+            <section className="input__controls">
+                <div>
+                    <InputField id="create-english-text" label="English"
+                                type="text" placeholder="English" />                
+                    <InputField id="create-cyrillic-text" label="русский"
+                                type="text" placeholder="русский"
+                                value={this.state.cyrillicInput}/>
+                </div>
+
                 <CyrillicKeyboard keyboardPressHandler={ this.processKeyboardClick } />
 
-                <button onClick={() => this.props.history.push('/options')}>Return</button>
+                <div className="buttons__actions">
+                    <Button variant="primary" className="button__action">
+                        Create Flashcard / Создать карточку
+                    </Button>
+                    <Button variant="primary" className="button__action"
+                            onClick={() => this.props.history.push('/options')}>
+                        Return / вернуться
+                    </Button>
+                </div>
             </section>
         );
     }
