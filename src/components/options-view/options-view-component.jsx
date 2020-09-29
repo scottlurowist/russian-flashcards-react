@@ -39,7 +39,7 @@ const OptionsView = (routerProps) => {
                         Delete Flashcard / Удалить карточк
             </Button> 
             <Button variant="primary" className="options__button--spaced-top"
-                    onClick={() => routerProps.history.push('/')}>
+                    onClick={() => routerProps.history.push('/change-password')}>
                         Change Password / Изменить пароль
             </Button>             
             <Button variant="primary" className="options__button--spaced-top"
