@@ -20,9 +20,6 @@ import CreateFlashcardView from './components/flashcards-views/create-flashcard-
 import DeleteFlashcardView from './components/flashcards-views/delete-flashcard-view-component';
 import UpdateFlashcardView from './components/flashcards-views/update-flashcard-view-component';
 import ViewFlashcardsView from './components/flashcards-views/view-flashcards-view-component';
-// import InputField from './components/input-field/input-field-component';
-// import CyrillicKeyboard from './components/cyrillic-keyboard/cyrillic-keyboard-component'
-
 
 import './App.scss';
 
@@ -33,25 +30,7 @@ class App extends Component {
 
   constructor() {
     super();
-
-    this.state = {
-      cyrillicInput: ''
-    };
   };
-
-  
-  // A callback method passed to the Cyrillic keyboard component that
-  // sets the state that represents a Russian word typed by the keyboard.
-  // It takes a Cyrillic character and adds it as a suffix to the state
-  // representing that word.
-  //
-  // cyrillicCharacter - a Cyrillic character typed by the CyrillicKeyboard
-  //                     component.
-  // 
-  processKeyboardClick = cyrillicCharacter => {
-
-    this.setState({cyrillicInput: this.state.cyrillicInput + cyrillicCharacter});
-  }
 
 
   render() {
@@ -66,11 +45,6 @@ class App extends Component {
         <Route exact path='/delete-flashcard' component={DeleteFlashcardView} />  
         <Route exact path='/update-flashcard' component={UpdateFlashcardView} />  
         <Route exact path='/view-flashcards' component={ViewFlashcardsView} />                                      
-        {/* <h1>Welcome To Russian Flashcards</h1>
-        <InputField id="cyrillic-text" label="русский"
-                    type="text" placeholder="русский"
-                    value={this.state.cyrillicInput}/>
-        <CyrillicKeyboard keyboardPressHandler={ this.processKeyboardClick } /> */}
       </main>      
     );
   }
