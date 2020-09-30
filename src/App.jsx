@@ -37,13 +37,24 @@ class App extends Component {
 
   constructor() {
     super();
+
+    this.state = {
+      // The intial message displayed in the status message area when the 
+      // application begins.
+      message: 
+        "Welcome to Russian Flashcards / добро пожаловать в карточки на русском"
+    };
   };
 
 
   render() {
     return (
       <main>
-        <Route path='/' component={StatusMessages} />
+        <Route path='/' render={ () => {
+          return (
+            <StatusMessages message={this.state.message}/>
+          )
+        }} />
         <Route exact path='/' component={HomeView} />
         <Route exact path='/signup' component={SignupView} />
         <Route exact path='/signin' component={SigninView} />
