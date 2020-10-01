@@ -9,17 +9,29 @@
 
 
 
-.input__controls {
+form {
     margin: 0 auto;
-    width:40%;
+    width: 50%;
 }
 
+.form--centered {
+    margin: 0 auto 2rem auto;
+}
+
+
+#span-language {
+    margin-right: 1rem;
+}
+
+.input__control {
+    display: inline;
+}
 
 .buttons__actions {
     display: flex;
     justify-content: center;
 
     .button__action {
-        margin: 0 20px 0 20px;
+        margin: 1rem;
     }
 }

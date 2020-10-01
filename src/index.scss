@@ -22,7 +22,9 @@ $theme-colors: (
 @import "~bootstrap/scss/bootstrap";
 
 
-
+* {
+  box-sizing: border-box;
+}
 
 html {
   // Set this explicitly so that we can use REM units.
