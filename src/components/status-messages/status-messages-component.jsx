@@ -12,11 +12,17 @@
 import React from 'react';
 
 
-const StatusMessages = () => {
 
-    return(
 
-        <h1>Welcome to Russian Flashcards / добро пожаловать в карточки на русском</h1>
+// Implements the StatusMessages component.
+//
+// message - The message to be displayed in the status message component.
+//
+//
+const StatusMessages = ({message}) => {
+
+    return (
+        <p className="status-notification-message-area">{message}</p>
     );
 }
 
