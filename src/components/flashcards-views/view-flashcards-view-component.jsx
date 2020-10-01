@@ -24,7 +24,7 @@ import './flashcards-views.scss'
 // Implements the view Flashcard view.
 class ViewFlashcardsView extends Component {
 
-    constructor(props) {
+    constructor({displayStatusMessageMethod, history}) {
         
         super();
 
@@ -40,7 +40,18 @@ class ViewFlashcardsView extends Component {
             englishInput: '',
             selectedLanguage: 'english'
         };
+
+        this.history = history;
+        this.displayStatusMessageMethod = displayStatusMessageMethod;
     }
+
+
+    // A React.js lifecycle method that is invoked immediately after a
+    // component is mounted (inserted into the tree). 
+    //
+    componentDidMount = () => {
+        this.displayStatusMessageMethod('View flashcards - Select an input language');
+    }  
 
 
     // A callback method passed to the Cyrillic keyboard component that
@@ -116,7 +127,9 @@ class ViewFlashcardsView extends Component {
                                     English
                                 </Form.Label>
                                 <Form.Control type="text" 
-                                              disabled={this.state.selectedLanguage === 'russian'}
+                                              disabled={
+                                                  this.state.selectedLanguage === 'russian'
+                                              }
                                               onChange={this.handleEnglishKeyboardChange}
                                               value={this.state.englishInput}
                                               placeholder='English' />
@@ -128,28 +141,36 @@ class ViewFlashcardsView extends Component {
                                     русский
                                 </Form.Label>
                                 <Form.Control type="text" placeholder='русский'
-                                              disabled={this.state.selectedLanguage === 'english'}
-                                              // We need this or else this control will be readonly.
-                                              //onChange={event => {}}
+                                              disabled={
+                                                  this.state.selectedLanguage === 'english'
+                                              }
                                               value={this.state.cyrillicInput}/>                                           
                             </Form.Group>
                         </Col>
                     </Row>
-                        <CyrillicKeyboard disabled={this.state.selectedLanguage === 'english'}
-                                          keyboardPressHandler={ this.handleCyrillicKeyboardClick } />
                     <Row>
+                        <Col>
+                            <CyrillicKeyboard disabled={
+                                                this.state.selectedLanguage === 'english'
+                                              }
+                                              keyboardPressHandler={
+                                                this.handleCyrillicKeyboardClick
+                                              } />                            
+                        </Col>                      
                     </Row>
-                    <Row className="buttons__actions">
-                        <Button variant="primary" className="button__action">
-                            Check / Проверить
-                        </Button>
-                        <Button variant="primary" className="button__action">
-                            Next / Следующая карточка
-                        </Button>    
-                        <Button variant="primary" className="button__action"
-                                onClick={() => this.props.history.push('/options')}>
-                            Return / вернуться
-                        </Button>                                                                
+                    <Row>
+                        <Col className="buttons__actions">
+                            <Button variant="primary" className="button__action">
+                                Check / Проверить
+                            </Button>
+                            <Button variant="primary" className="button__action">
+                                Next / Следующая карточка
+                            </Button>    
+                            <Button variant="primary" className="button__action"
+                                    onClick={() => this.props.history.push('/options')}>
+                                Return / вернуться
+                            </Button> 
+                        </Col>
                     </Row>
                 </Form>
             </section>

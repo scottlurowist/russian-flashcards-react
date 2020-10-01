@@ -99,11 +99,22 @@ class App extends Component {
             <OptionsView displayStatusMessageMethod={this.displayStatusMessage}
                          history={history} />
          );
-        }} />              
-        <Route exact path='/create-flashcard' component={CreateFlashcardView} />   
+        }} />  
+        <Route exact path='/create-flashcard' render={ ({history}) => {
+          return (
+            <CreateFlashcardView displayStatusMessageMethod={this.displayStatusMessage}
+                                 history={history} />
+         );
+        }} />                        
+ 
         <Route exact path='/delete-flashcard' component={DeleteFlashcardView} />  
-        <Route exact path='/update-flashcard' component={UpdateFlashcardView} />  
-        <Route exact path='/view-flashcards' component={ViewFlashcardsView} />                                      
+        <Route exact path='/update-flashcard' component={UpdateFlashcardView} /> 
+        <Route exact path='/view-flashcards' render={ ({history}) => {
+          return (
+            <ViewFlashcardsView displayStatusMessageMethod={this.displayStatusMessage}
+                                history={history} />
+         );
+        }} />              
       </main>      
     );
   }
