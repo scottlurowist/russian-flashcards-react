@@ -42,14 +42,16 @@ class App extends Component {
 
     this.state = {
       // The intial message displayed in the status message area when the 
-      // application begins.
+      // application begins. The initial message is a stub / placeholder 
+      // for views to display the messages meaningful to them.
       message: 'Stub message.'
     };
   };
 
 
   // A callback function for child components in order to write status messages
-  // to the StatusMessage component.
+  // to the StatusMessage component. This alters state which will cause a 
+  // render to occur.
   //
   // message- The message to be written to the StatusMessage component.
   //
@@ -58,6 +60,8 @@ class App extends Component {
   };
 
 
+  // A React.js lifecycle method that renders the component.
+  //
   render() {
     return (
       <main>
@@ -72,8 +76,13 @@ class App extends Component {
                       history={history} />
          );
         }} />
-        <Route exact path='/signup' component={SignupView} />
-        <Route exact path='/signin' component={SigninView} />
+        <Route exact path='/signup' component={SignupView} />        
+        <Route exact path='/signin' render={ ({history}) => {
+          return (
+            <SigninView displayStatusMessageMethod={this.displayStatusMessage}
+                      history={history} />
+         );
+        }} />        
         <Route exact path='/change-password' component={ChangePasswordView} />        
         <Route exact path='/options' component={OptionsView} />   
         <Route exact path='/create-flashcard' component={CreateFlashcardView} />   
