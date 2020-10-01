@@ -33,6 +33,8 @@ import './App.scss';
 
 
 
+// Implements the main Russian Flascard application.
+//
 class App extends Component {
 
   constructor() {
@@ -41,9 +43,18 @@ class App extends Component {
     this.state = {
       // The intial message displayed in the status message area when the 
       // application begins.
-      message: 
-        "Welcome to Russian Flashcards / добро пожаловать в карточки на русском"
+      message: 'Stub message.'
     };
+  };
+
+
+  // A callback function for child components in order to write status messages
+  // to the StatusMessage component.
+  //
+  // message- The message to be written to the StatusMessage component.
+  //
+  displayStatusMessage = message => {
+    this.setState({message: message});
   };
 
 
@@ -53,9 +64,14 @@ class App extends Component {
         <Route path='/' render={ () => {
           return (
             <StatusMessages message={this.state.message}/>
-          )
+          );
         }} />
-        <Route exact path='/' component={HomeView} />
+        <Route exact path='/' render={ ({history}) => {
+          return (
+            <HomeView displayStatusMessageMethod={this.displayStatusMessage}
+                      history={history} />
+         );
+        }} />
         <Route exact path='/signup' component={SignupView} />
         <Route exact path='/signin' component={SigninView} />
         <Route exact path='/change-password' component={ChangePasswordView} />        

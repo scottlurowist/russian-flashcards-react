@@ -22,3 +22,17 @@
     text-align: center;
     width: 70%;
 }
+
+.div--centered-content {
+    display: flex;
+    justify-content: center;
+}
+
+.buttons__actions {
+    display: flex;
+    justify-content: center;
+
+    .button__action {
+        margin: 1rem;
+    }
+}
