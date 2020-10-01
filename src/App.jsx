@@ -88,8 +88,13 @@ class App extends Component {
                       history={history} />
          );
         }} />        
-        <Route exact path='/change-password' component={ChangePasswordView} />        
-        <Route exact path='/options' component={OptionsView} />   
+        <Route exact path='/change-password' component={ChangePasswordView} />     
+        <Route exact path='/options' render={ ({history}) => {
+          return (
+            <OptionsView displayStatusMessageMethod={this.displayStatusMessage}
+                         history={history} />
+         );
+        }} />              
         <Route exact path='/create-flashcard' component={CreateFlashcardView} />   
         <Route exact path='/delete-flashcard' component={DeleteFlashcardView} />  
         <Route exact path='/update-flashcard' component={UpdateFlashcardView} />  
