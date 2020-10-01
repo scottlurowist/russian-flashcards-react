@@ -79,16 +79,21 @@ class App extends Component {
         <Route exact path='/signup' render={ ({history}) => {
           return (
             <SignupView displayStatusMessageMethod={this.displayStatusMessage}
-                      history={history} />
+                        history={history} />
          );
         }} />        
         <Route exact path='/signin' render={ ({history}) => {
           return (
             <SigninView displayStatusMessageMethod={this.displayStatusMessage}
-                      history={history} />
+                        history={history} />
          );
-        }} />        
-        <Route exact path='/change-password' component={ChangePasswordView} />     
+        }} /> 
+        <Route exact path='/change-password' render={ ({history}) => {
+          return (
+            <ChangePasswordView displayStatusMessageMethod={this.displayStatusMessage}
+                                history={history} />
+         );
+        }} />                
         <Route exact path='/options' render={ ({history}) => {
           return (
             <OptionsView displayStatusMessageMethod={this.displayStatusMessage}
