@@ -31,19 +31,15 @@ class ViewFlashcardsView extends Component {
         // The state for this view.
         //
         // englishInput - The input text field value for English.
-        // englishInputRef - A reference to the english input field.
         // cyrillicInput - The input text field value for Russian.
         // selectedLanguage - The currently selected radio button
         //                    for the input language.
         //
         this.state = {
             cyrillicInput: '',
+            englishInput: '',
             selectedLanguage: 'english'
         };
-
-        // This does not need to be in state because the ref never changes
-        // and won't trigger a re-render.
-        this.englishInputRef = React.createRef();
     }
 
 
@@ -62,6 +58,17 @@ class ViewFlashcardsView extends Component {
     };
 
 
+    // Handles changes in the English input text control.
+    //
+    // event - A React synthetic event that has changes to the
+    //         English input field.
+    handleEnglishKeyboardChange = event => {
+        this.setState({
+            englishInput: event.target.value
+        });
+    };
+
+
     // A handler for the radio buttons which determine which language we are using
     // for our flashcard guess. This sets the selectedLanguage state and resets
     // the input text fields.
@@ -72,11 +79,9 @@ class ViewFlashcardsView extends Component {
 
         this.setState({
             cyrillicInput: '',
+            englishInput: '',
             selectedLanguage: event.target.value
         });
-
-        // Clear the english language text field.
-        this.englishInputRef.current.value = '';
     };
 
 
@@ -112,7 +117,8 @@ class ViewFlashcardsView extends Component {
                                 </Form.Label>
                                 <Form.Control type="text" 
                                               disabled={this.state.selectedLanguage === 'russian'}
-                                              ref={this.englishInputRef}
+                                              onChange={this.handleEnglishKeyboardChange}
+                                              value={this.state.englishInput}
                                               placeholder='English' />
                             </Form.Group>
                         </Col>
