@@ -51,7 +51,8 @@ class HomeView extends React.Component {
                     <Row>
                         <Col>
                         <div className="div--centered-content">
-                            <img src={ flag } width="648" height="486" />
+                            <img src={ flag } alt="St. Basils_Cathedral_Moscow"
+                                 width="648" height="420" />
                         </div>                    
                         </Col>
                     </Row>
