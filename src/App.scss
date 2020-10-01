@@ -5,3 +5,20 @@
 // Provides styling for App.jsx.
 //
 ////////////////////////////////////////////////////////////////////////////////
+
+
+ 
+
+.status-notification-message-area {
+    background-color: blue;
+    border: .2rem solid red;
+    border-radius: 1rem;
+    color: white;
+    font-size: 1.25rem;
+    margin: 2.5rem auto 1.5rem auto;
+    max-height: 30%;
+    min-height: 30%;
+    padding: .5rem;
+    text-align: center;
+    width: 70%;
+}
