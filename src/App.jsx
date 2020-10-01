@@ -76,7 +76,12 @@ class App extends Component {
                       history={history} />
          );
         }} />
-        <Route exact path='/signup' component={SignupView} />        
+        <Route exact path='/signup' render={ ({history}) => {
+          return (
+            <SignupView displayStatusMessageMethod={this.displayStatusMessage}
+                      history={history} />
+         );
+        }} />        
         <Route exact path='/signin' render={ ({history}) => {
           return (
             <SigninView displayStatusMessageMethod={this.displayStatusMessage}

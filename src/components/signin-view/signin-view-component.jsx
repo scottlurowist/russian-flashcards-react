@@ -101,7 +101,7 @@ class SigninView extends React.Component {
                                 <Form.Label className="text-danger">
                                     Password / Пароль
                                 </Form.Label>
-                                <Form.Control type="text" 
+                                <Form.Control type="password" 
                                               onChange={ this.handlePasswordChange }  
                                               value={this.state.password}
                                               placeholder='password' />                                           
