@@ -24,27 +24,34 @@ import './flashcards-views.scss'
 // Implements the view Flashcard view.
 class ViewFlashcardsView extends Component {
 
-    constructor(props) {
+    constructor({displayStatusMessageMethod, history}) {
         
         super();
 
         // The state for this view.
         //
         // englishInput - The input text field value for English.
-        // englishInputRef - A reference to the english input field.
         // cyrillicInput - The input text field value for Russian.
         // selectedLanguage - The currently selected radio button
         //                    for the input language.
         //
         this.state = {
             cyrillicInput: '',
+            englishInput: '',
             selectedLanguage: 'english'
         };
 
-        // This does not need to be in state because the ref never changes
-        // and won't trigger a re-render.
-        this.englishInputRef = React.createRef();
+        this.history = history;
+        this.displayStatusMessageMethod = displayStatusMessageMethod;
     }
+
+
+    // A React.js lifecycle method that is invoked immediately after a
+    // component is mounted (inserted into the tree). 
+    //
+    componentDidMount = () => {
+        this.displayStatusMessageMethod('View flashcards - Select an input language');
+    }  
 
 
     // A callback method passed to the Cyrillic keyboard component that
@@ -62,6 +69,17 @@ class ViewFlashcardsView extends Component {
     };
 
 
+    // Handles changes in the English input text control.
+    //
+    // event - A React synthetic event that has changes to the
+    //         English input field.
+    handleEnglishKeyboardChange = event => {
+        this.setState({
+            englishInput: event.target.value
+        });
+    };
+
+
     // A handler for the radio buttons which determine which language we are using
     // for our flashcard guess. This sets the selectedLanguage state and resets
     // the input text fields.
@@ -72,11 +90,9 @@ class ViewFlashcardsView extends Component {
 
         this.setState({
             cyrillicInput: '',
+            englishInput: '',
             selectedLanguage: event.target.value
         });
-
-        // Clear the english language text field.
-        this.englishInputRef.current.value = '';
     };
 
 
@@ -111,8 +127,11 @@ class ViewFlashcardsView extends Component {
                                     English
                                 </Form.Label>
                                 <Form.Control type="text" 
-                                              disabled={this.state.selectedLanguage === 'russian'}
-                                              ref={this.englishInputRef}
+                                              disabled={
+                                                  this.state.selectedLanguage === 'russian'
+                                              }
+                                              onChange={this.handleEnglishKeyboardChange}
+                                              value={this.state.englishInput}
                                               placeholder='English' />
                             </Form.Group>
                         </Col>
@@ -122,28 +141,36 @@ class ViewFlashcardsView extends Component {
                                     русский
                                 </Form.Label>
                                 <Form.Control type="text" placeholder='русский'
-                                              disabled={this.state.selectedLanguage === 'english'}
-                                              // We need this or else this control will be readonly.
-                                              //onChange={event => {}}
+                                              disabled={
+                                                  this.state.selectedLanguage === 'english'
+                                              }
                                               value={this.state.cyrillicInput}/>                                           
                             </Form.Group>
                         </Col>
                     </Row>
-                        <CyrillicKeyboard disabled={this.state.selectedLanguage === 'english'}
-                                          keyboardPressHandler={ this.handleCyrillicKeyboardClick } />
                     <Row>
+                        <Col>
+                            <CyrillicKeyboard disabled={
+                                                this.state.selectedLanguage === 'english'
+                                              }
+                                              keyboardPressHandler={
+                                                this.handleCyrillicKeyboardClick
+                                              } />                            
+                        </Col>                      
                     </Row>
-                    <Row className="buttons__actions">
-                        <Button variant="primary" className="button__action">
-                            Check / Проверить
-                        </Button>
-                        <Button variant="primary" className="button__action">
-                            Next / Следующая карточка
-                        </Button>    
-                        <Button variant="primary" className="button__action"
-                                onClick={() => this.props.history.push('/options')}>
-                            Return / вернуться
-                        </Button>                                                                
+                    <Row>
+                        <Col className="buttons__actions">
+                            <Button variant="primary" className="button__action">
+                                Check / Проверить
+                            </Button>
+                            <Button variant="primary" className="button__action">
+                                Next / Следующая карточка
+                            </Button>    
+                            <Button variant="primary" className="button__action"
+                                    onClick={() => this.props.history.push('/options')}>
+                                Return / вернуться
+                            </Button> 
+                        </Col>
                     </Row>
                 </Form>
             </section>
