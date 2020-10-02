@@ -51,6 +51,32 @@ class FlashcardsDataModel {
     };
 
 
+    // Allows the user to create a flashcard invoking the
+    // webservice for creating a flashcard. 
+    //
+    // russianWord - The Russian word to be saved to a flashcard.
+    // newPassword - The English word to be saved to a flashcard.
+    // token - A JSON web token used for authorization to the web service.
+    //
+    createFlashcard = (russianWord, englishWord, token) => {
+
+        const data =  {
+            "flashcard": {
+              "englishWord": russianWord,
+              "russianWord": englishWord
+            }
+        }
+
+        // Return the promise to the caller.
+        return axios({
+            method: 'post',
+            url: `${apiUrl}/flashcards`,
+            headers: {'Authorization': `Bearer ${token}`},
+            data: data
+        });
+    };    
+
+
     // Allows the user to logout of Russian Flashcards by invoking the
     // webservice for logging out. 
     //
