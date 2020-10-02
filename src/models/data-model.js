@@ -11,10 +11,12 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-// This is General Assembly code that I added to my project.
-import apiUrl from './../apiConfig'
-
 import axios from 'axios'
+
+
+// This is General Assembly code that I added to my project. This config file
+// contains the URLs for data access.
+import apiUrl from './../apiConfig'
 
 
 
@@ -23,16 +25,37 @@ import axios from 'axios'
 //
 class FlashcardsDataModel {
 
-    constructor() {
-        this.foo = 1;
-    }
+    // Allows the user to change their password by invoking the
+    // webservice for changing a password. 
+    //
+    // oldPassword - The password to be changed.
+    // newPassword - The password to replace oldPassword.
+    // token - A JSON web token used for authorization to the web service.
+    //
+    changePassword = (oldPassword, newPassword, token) => {
+
+        const data =  {
+            "passwords": {
+              "old": oldPassword,
+              "new": newPassword
+            }
+        }
+
+        // Return the promise to the caller.
+        return axios({
+            method: 'patch',
+            url: `${apiUrl}/change-password`,
+            headers: {'Authorization': `Bearer ${token}`},
+            data: data
+        });
+    };
 
 
-    // changePassword = (oldPassword, newPassword) => {
-
-    // };
-
-
+    // Allows the user to logout of Russian Flashcards by invoking the
+    // webservice for logging out. 
+    //
+    // token - A JSON web token used for authorization to the web service.
+    //
     logout = (token) => {
 
         // Return the promise to the caller.
@@ -40,10 +63,16 @@ class FlashcardsDataModel {
                   method: 'delete',
                   url: `${apiUrl}/sign-out`,
                   headers: {'Authorization': `Bearer ${token}`}
-              });
+        });
     };
 
 
+    // Allows the user to logout of Russian Flashcards by invoking the
+    // webservice for logging out. 
+    //
+    // email - The user's email used as their ID in the Russian Flashcards app.
+    // password - The user's password.
+    //
     signin = (email, password) => {
 
         const data = {

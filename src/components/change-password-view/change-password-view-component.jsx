@@ -14,6 +14,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
+import store from './../../store';
+import FlashcardsDataModel from './../../models/data-model';
+
 
 
 
@@ -31,6 +34,7 @@ class ChangePasswordView extends React.Component {
 
         this.history = history;
         this.displayStatusMessageMethod = displayStatusMessageMethod;
+        this.dataModel = new FlashcardsDataModel();
     }
 
 
@@ -43,17 +47,22 @@ class ChangePasswordView extends React.Component {
 
 
     // Handles the form submission which in turn invokes the web service to
-    // sign into the app. If successful, then we navigate to the options view.
+    // change the password. If successful, then we navigate to the options view.
     //
     // event - A React synthetic event that represents the form submission.
     //
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
 
-        //if ()
-        // TODO: API call here...
-        alert(this.state.old_password + '  ' + this.state.new_password)
-        this.history.push('/options');
+        try {
+            await this.dataModel.changePassword(this.state.old_password,
+                this.state.new_password, store.user.token);
+
+            this.history.push('/options');
+        }
+        catch(exception) {
+            this.displayStatusMessageMethod(exception.message);
+        }
     };
 
 
