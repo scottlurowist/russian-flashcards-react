@@ -62,8 +62,8 @@ class FlashcardsDataModel {
 
         const data =  {
             "flashcard": {
-              "englishWord": russianWord,
-              "russianWord": englishWord
+              "englishWord": englishWord,
+              "russianWord": russianWord
             }
         }
 
@@ -75,6 +75,22 @@ class FlashcardsDataModel {
             data: data
         });
     };    
+
+
+    // Allows the user to get all flashcards by invoking the
+    // webservice for index. 
+    //
+    // token - A JSON web token used for authorization to the web service.
+    //
+    getAllFlashcards = (token) => {
+
+        // Return the promise to the caller.
+        return axios({
+            method: 'get',
+            url: `${apiUrl}/flashcards`,
+            headers: {'Authorization': `Bearer ${token}`}
+        });
+    };
 
 
     // Allows the user to logout of Russian Flashcards by invoking the

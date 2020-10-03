@@ -62,8 +62,8 @@ class CreateFlashcardView extends Component {
                     this.state.englishInput, store.user.token);
 
             this.displayStatusMessageMethod(
-                `The flashcard - ${this.state.englishInput} / 
-                ${this.state.cyrillicInput} - was created successfully`);        
+                `The flashcard  - ${this.state.englishInput} / 
+                ${this.state.cyrillicInput} -  was created successfully`);        
         }
         catch(exception) {
             this.displayStatusMessageMethod(exception.message);
