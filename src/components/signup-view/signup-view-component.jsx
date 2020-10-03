@@ -14,6 +14,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
+import FlashcardsDataModel from './../../models/data-model';
 
 
 
@@ -32,6 +33,7 @@ class SignupView extends React.Component {
 
         this.history = history;
         this.displayStatusMessageMethod = displayStatusMessageMethod;
+        this.dataModel = new FlashcardsDataModel();
     }
 
 
@@ -48,14 +50,18 @@ class SignupView extends React.Component {
     //
     // event - A React synthetic event that represents the form submission.
     //
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
 
-        //if ()
-        // TODO: API call here...
-        alert(this.state.email + '  ' + this.state.password + '  ' + 
-              this.state.confirmation_password)
-        this.history.push('/signin');
+        try {
+            await this.dataModel.createAccount(this.state.email,
+                this.state.password, this.state.confirmation_password);
+
+            this.history.push('/signin');
+        }
+        catch(exception) {
+            this.displayStatusMessageMethod(exception.message);
+        }
     };
 
 

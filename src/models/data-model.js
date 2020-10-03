@@ -25,6 +25,27 @@ import apiUrl from './../apiConfig'
 //
 class FlashcardsDataModel {
 
+    // Allows the user to logout of Russian Flashcards by invoking the
+    // webservice for logging out. 
+    //
+    // email - The user's email used as their ID in the Russian Flashcards app.
+    // password - The user's password.
+    //
+    createAccount = (email, password, confirmationPassword) => {
+
+        const data = {
+            "credentials": {
+                "email": email,
+                "password": password,
+                "password_confirmation": confirmationPassword
+            }
+        }; 
+
+        // Return the promise to the caller.
+        return axios.post(`${apiUrl}/sign-up`, data);
+    };
+
+
     // Allows the user to change their password by invoking the
     // webservice for changing a password. 
     //
