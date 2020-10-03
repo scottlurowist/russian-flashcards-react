@@ -148,6 +148,33 @@ class FlashcardsDataModel {
         // Return the promise to the caller.
         return axios.post(`${apiUrl}/sign-in`, data);
     };
+
+
+    // Allows the user to update a flashcard invoking the
+    // webservice for creating a flashcard. 
+    //
+    // flashcardId - The id of the flashcard to update.
+    // russianWord - The Russian word to be udated in a flashcard.
+    // newPassword - The English word to be updated in a flashcard.
+    // token - A JSON web token used for authorization to the web service.
+    //
+    updateFlashcard = (flashcardId, russianWord, englishWord, token) => {
+
+        const data =  {
+            "flashcard": {
+              "englishWord": englishWord,
+              "russianWord": russianWord
+            }
+        }
+
+        // Return the promise to the caller.
+        return axios({
+            method: 'patch',
+            url: `${apiUrl}/flashcards/${flashcardId}`,
+            headers: {'Authorization': `Bearer ${token}`},
+            data: data
+        });
+    };   
 }
 
 
