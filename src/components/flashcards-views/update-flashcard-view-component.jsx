@@ -203,7 +203,7 @@ class UpdateFlashcardView extends Component {
         
         return (
             <section className="input__controls">
-                <Form>
+                <Form onSubmit={this.handleSubmit}>
                     <Row>
                         <Col>
                             <div className="scrollable-flashcards">
@@ -263,10 +263,10 @@ class UpdateFlashcardView extends Component {
                     </Row>
                     <Row>
                         <Col className="buttons__actions">
-                            <Button variant="primary" 
+                            <Button variant="primary"
+                                    type="submit"
                                     disabled={this.state.englishInput === '' ||
                                               this.state.cyrillicInput === ''}
-                                    onClick={this.handleSubmit}
                                     className="button__action">
                                 Update Flashcard / Обновить карточку
                             </Button>

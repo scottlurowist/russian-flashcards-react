@@ -220,7 +220,7 @@ class ViewFlashcardsView extends Component {
     //
     // event - A React synthetic event that represents the form submission.
     //
-    handleStartButton = async (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
@@ -319,8 +319,7 @@ class ViewFlashcardsView extends Component {
                                         value="russian" />  
                             <Button variant="primary" 
                                     disabled={ this.state.startButtonDisabled }  
-                                    type="button"
-                                    onClick={ this.handleStartButton }
+                                    type="submit"
                                     className="button__action">
                                 Start / Проверить
                             </Button>                                                  
