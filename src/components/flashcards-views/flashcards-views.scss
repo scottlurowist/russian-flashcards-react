@@ -1,0 +1,55 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+// flashcards-views.scss
+//
+// Provides styling that is specific to the Russian Flashcards view components.
+//
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+form {
+    margin: 0 auto;
+    width: 50%;
+}
+
+.form--centered {
+    margin: 0 auto 1.5rem auto;
+}
+
+
+#span-language {
+    margin-right: 1rem;
+}
+
+.input__control {
+    display: inline;
+}
+
+.buttons__actions {
+    display: flex;
+    justify-content: center;
+
+    .button__action {
+        margin: .5rem;
+    }
+}
+
+.scrollable-flashcards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    overflow: auto;
+    height: 8.5rem;
+    margin-bottom: 1rem;
+}
+
+.flashcard {
+    margin: 1rem;
+    border: .2rem solid red;
+    border-radius: 1rem;
+    padding: .4rem;
+}

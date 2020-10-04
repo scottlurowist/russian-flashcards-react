@@ -1,0 +1,47 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+// index.scss
+//
+// Provides application-wide styling for Russian Flashcards.
+//
+////////////////////////////////////////////////////////////////////////////////
+
+
+@import './variables';
+
+
+// Override the Boostrap primary colors
+// These need to be set first before loading Bootstrap SCSS.
+$theme-colors: (
+  primary: $russian-flag-blue,
+  danger: $russian-flag-red
+);
+
+
+// Now we can import Bootstrap SCSS in order to override some defaults.
+@import "~bootstrap/scss/bootstrap";
+
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  // Set this explicitly so that we can use REM units.
+  // 1 REM is 18 pixels.
+  font-size: 17px;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
