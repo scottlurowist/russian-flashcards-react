@@ -120,7 +120,7 @@ class ViewFlashcardsView extends Component {
         // If we received the backspace character, then simply remove the 
         // last character from the existing russian word. Otherwise,
         // suffix the new character to the end of the input.
-        if (cyrillicCharacter === 'бекспейс') {
+        if (cyrillicCharacter === 'назад') {
             newCyrillicInput = this.state.cyrillicInput.slice(0, -1);
         }
         else {
@@ -362,7 +362,8 @@ class ViewFlashcardsView extends Component {
                                 <Form.Label className="text-danger">
                                     русский
                                 </Form.Label>
-                                <Form.Control type="text" placeholder='русский'
+                                <Form.Control type="text" 
+                                              placeholder='русский'
                                               disabled={
                                                   this.state.selectedLanguage === 'english'
                                               }

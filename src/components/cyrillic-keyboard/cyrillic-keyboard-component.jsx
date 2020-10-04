@@ -139,7 +139,7 @@ const CyrillicKeyboard = ({disabled, keyboardPressHandler}) => {
                         variant="danger"
                         disabled={disabled}
                         className="cyrillic__button backspace-key ">
-                    бекспейс
+                    назад
                 </Button>
             </div>    
             { /* The final row of our Cyrillic soft keyboard. */}
