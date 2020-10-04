@@ -245,6 +245,14 @@ class ViewFlashcardsView extends Component {
                 await this.dataModel.getAllFlashcards(store.user.token);
 
             this.flashcards = response.data.flashcards;
+
+            if (this.flashcards.length === 0) {
+                
+                this.displayStatusMessageMethod(
+                    "There are no flashcards. You must create at least one flashcard to view them");
+                    
+                return;    
+            }
            
             this.flashcardNumberCurrentlyShown = 0;    
 
