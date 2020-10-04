@@ -15,6 +15,8 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 
 import CyrillicKeyboard from '../cyrillic-keyboard/cyrillic-keyboard-component';
+import store from './../../store';
+import FlashcardsDataModel from './../../models/data-model';
 
 import './flashcards-views.scss'
 
@@ -35,6 +37,7 @@ class CreateFlashcardView extends Component {
 
         this.history = history;
         this.displayStatusMessageMethod = displayStatusMessageMethod;
+        this.dataModel = new FlashcardsDataModel();
     }
 
 
@@ -44,6 +47,28 @@ class CreateFlashcardView extends Component {
     componentDidMount = () => {
         this.displayStatusMessageMethod('Create a Flashcard');
     }      
+
+
+    // Handles the form submission which in turn invokes the web service to
+    // create a flashcard. If successful, then we navigate to the options view.
+    //
+    // event - A React synthetic event that represents the form submission.
+    //
+    handleSubmit = async (event) => {
+        event.preventDefault();
+
+        try {
+            await this.dataModel.createFlashcard(this.state.cyrillicInput,
+                    this.state.englishInput, store.user.token);
+
+            this.displayStatusMessageMethod(
+                `The flashcard  - ${this.state.englishInput} / 
+                ${this.state.cyrillicInput} -  was created successfully`);        
+        }
+        catch(exception) {
+            this.displayStatusMessageMethod(exception.message);
+        }
+    };
 
 
     // A callback method passed to the Cyrillic keyboard component that
@@ -78,7 +103,7 @@ class CreateFlashcardView extends Component {
         
         return (
             <section className="input__controls">
-                <Form>
+                <Form onSubmit={this.handleSubmit}>
                     <Row>
                         <Col>
                             <Form.Group controlId="english-text" >
@@ -122,6 +147,7 @@ class CreateFlashcardView extends Component {
                     <Row>
                         <Col className="buttons__actions">
                             <Button variant="primary" 
+                                    type="submit" 
                                     disabled={this.state.englishInput === '' ||
                                               this.state.cyrillicInput === ''}
                                     className="button__action">

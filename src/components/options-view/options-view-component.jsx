@@ -11,6 +11,9 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 
+import store from './../../store';
+import FlashcardsDataModel from './../../models/data-model';
+
 import './options-view-component.scss';
 
 
@@ -30,6 +33,7 @@ class OptionsView extends React.Component {
 
         this.history = history;
         this.displayStatusMessageMethod = displayStatusMessageMethod;        
+        this.dataModel = new FlashcardsDataModel();
     };
 
 
@@ -38,6 +42,25 @@ class OptionsView extends React.Component {
     //
     componentDidMount = () => {
         this.displayStatusMessageMethod('Please select an option from the choices below:');
+    };
+
+
+    exitTheApp = async () => {
+
+        try {
+            await this.dataModel.logout(store.user.token);
+
+            // Reset the user in the store.   
+            store.user = {};
+
+            this.displayStatusMessageMethod(
+                'You have successfully exited Russian Flashcards');
+
+            this.history.push('/');
+        }
+        catch(exception) {
+            this.displayStatusMessageMethod(exception.message);
+        }
     };
     
     
@@ -67,7 +90,7 @@ class OptionsView extends React.Component {
                             Change Password / Изменить пароль
                 </Button>             
                 <Button variant="primary" className="options__button--spaced-top"
-                        onClick={() => this.history.push('/')}>
+                        onClick={this.exitTheApp}>
                             Exit / Выход  из программы
                 </Button>                                                
             </section>
