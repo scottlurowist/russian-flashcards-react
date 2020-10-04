@@ -72,7 +72,7 @@ class FlashcardsDataModel {
     };
 
 
-    // Allows the user to create a flashcard invoking the
+    // Allows the user to delete a flashcard by invoking the
     // webservice for creating a flashcard. 
     //
     // russianWord - The Russian word to be saved to a flashcard.
@@ -96,6 +96,23 @@ class FlashcardsDataModel {
             data: data
         });
     };    
+
+
+    // Allows the user to get all flashcards by invoking the
+    // webservice for index. 
+    //
+    // flashcardId - The id of the flashcard to delete.
+    // token - A JSON web token used for authorization to the web service.
+    //
+    deleteFlashcard = (flashcardId, token) => {
+
+        // Return the promise to the caller.
+        return axios({
+            method: 'delete',
+            url: `${apiUrl}/flashcards/${flashcardId}`,
+            headers: {'Authorization': `Bearer ${token}`}
+        });
+    };
 
 
     // Allows the user to get all flashcards by invoking the
@@ -150,12 +167,12 @@ class FlashcardsDataModel {
     };
 
 
-    // Allows the user to update a flashcard invoking the
+    // Allows the user to update a flashcard by invoking the
     // webservice for creating a flashcard. 
     //
     // flashcardId - The id of the flashcard to update.
     // russianWord - The Russian word to be udated in a flashcard.
-    // newPassword - The English word to be updated in a flashcard.
+    // englishWord - The English word to be updated in a flashcard.
     // token - A JSON web token used for authorization to the web service.
     //
     updateFlashcard = (flashcardId, russianWord, englishWord, token) => {

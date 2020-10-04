@@ -16,6 +16,9 @@ import Button from 'react-bootstrap/Button';
 
 import CyrillicKeyboard from '../cyrillic-keyboard/cyrillic-keyboard-component';
 
+import store from './../../store';
+import FlashcardsDataModel from './../../models/data-model';
+
 import './flashcards-views.scss'
 
 
@@ -30,19 +33,32 @@ class DeleteFlashcardView extends Component {
 
         this.state = {
             cyrillicInput: '',
-            englishInput: ''
+            englishInput: '',
+            flashcards: [],
         };
 
         this.history = history;
         this.displayStatusMessageMethod = displayStatusMessageMethod;
+        this.dataModel = new FlashcardsDataModel(); 
+        this.selectedFlashcard = null;
     }
 
 
     // A React.js lifecycle method that is invoked immediately after a
     // component is mounted (inserted into the tree). 
     //
-    componentDidMount = () => {
+    componentDidMount = async () => {
         this.displayStatusMessageMethod('Delete a Flashcard');
+
+        try {
+            const response = 
+                await this.dataModel.getAllFlashcards(store.user.token);
+
+            this.setState({flashcards: response.data.flashcards} );     
+        }   
+        catch(exception) {
+            this.displayStatusMessageMethod(exception.message);
+        }        
     }      
 
 
@@ -72,13 +88,111 @@ class DeleteFlashcardView extends Component {
     };
 
 
+    handleFlashcardSelected = event => {
+        
+        let selectedElement;
+        
+        // You can either click the SPAN or the parent DIV.
+        // Handle both cases.
+        if (event.target.tagName === 'SPAN') {
+            selectedElement = event.target.parentElement;
+        }
+        else {
+            selectedElement = event.target;
+        }
+
+        // This saves the flashcard database ID and the words.
+        // We need the ID when we save the updates.
+        this.selectedFlashcard = selectedElement;
+
+        // Our words are in a span element and appear as 
+        // englishWord / russianWord.
+        const words = selectedElement.innerText.split('/');
+
+        console.log(words)
+        // Now use state databinding to load the words into the input fields.
+        this.setState({
+            englishInput: words[0].trim(),
+            cyrillicInput: words[1].trim()
+        });
+    };
+
+
+    // Handles the form submission which in turn invokes the web service to
+    // update a flashcard. 
+    //
+    // event - A React synthetic event that represents the form submission.
+    //
+    handleSubmit = async (event) => {
+        event.preventDefault();
+
+        try {
+
+            const id = this.selectedFlashcard.id;
+
+            await this.dataModel.deleteFlashcard(
+                id,
+                store.user.token
+            );
+
+            // Loop through our flashcards and find the flashcard that was 
+            // updated. We need to update it. Since it is in state, the 
+            // list of flashcards should re-render.
+            //
+            // TODO: Make this more efficient.
+            const flashcards = this.state.flashcards;
+
+            const filteredFlashcards = flashcards.filter( currentFlashcard => {
+
+                // Simply return every flashcard but the one to be deleted.
+                // Then we'll assign the filtered collection to state.
+                if (currentFlashcard._id !== id) return currentFlashcard;
+            });
+
+            // This will cause the flashcards to re-render since the state of 
+            // one of the flashcards has changed.
+            this.state.flashcards = filteredFlashcards;
+
+            this.displayStatusMessageMethod(
+                `The flashcard  - ${this.state.englishInput} / 
+                ${this.state.cyrillicInput} -  was updated successfully`);    
+                
+            this.setState({
+                cyrillicInput: '',
+                englishInput: ''
+            });    
+        }
+        catch(exception) {
+            this.displayStatusMessageMethod(exception.message);
+        }
+    };    
+
+
     // A React.js lifecycle method that renders the component.
     //
     render() {
         
         return (
             <section className="input__controls">
-                <Form>
+                <Form onSubmit={this.handleSubmit}>
+                    <Row>
+                        <Col>
+                            <div className="scrollable-flashcards">
+                                {this.state.flashcards.map(currentFlashcard =>
+                                    <div key={ currentFlashcard._id }
+                                        //  Use the ID property to encode our flashcard so that we
+                                        // know which flashcard to update.
+                                        id={ currentFlashcard._id }
+                                        className="flashcard"
+                                        onClick={this.handleFlashcardSelected}>
+                                        <span>
+                                            {currentFlashcard.englishWord} / {currentFlashcard.russianWord}
+                                        </span>              
+                                    </div>
+                                )}    
+                            </div>
+                        </Col>
+                    </Row>     
                     <Row>
                         <Col>
                             <Form.Group controlId="english-text" >
@@ -86,12 +200,7 @@ class DeleteFlashcardView extends Component {
                                     English
                                 </Form.Label>
                                 <Form.Control type="text" 
-                                              disabled={ false
-                                                  //this.state.selectedLanguage === 'russian'
-                                              }
-                                              onChange={
-                                                  this.handleEnglishKeyboardChange
-                                              }
+                                              disabled={ true }
                                               value={this.state.englishInput}
                                               placeholder='English' />
                             </Form.Group> 
@@ -102,26 +211,15 @@ class DeleteFlashcardView extends Component {
                                     русский
                                 </Form.Label>
                                 <Form.Control type="text" placeholder='русский'
-                                              disabled={ false
-                                                  //this.state.selectedLanguage === 'english'
-                                              }
+                                              disabled={ true }
                                               value={this.state.cyrillicInput}/>                                           
                             </Form.Group>
                         </Col>                                                   
                     </Row>
                     <Row>
-                        <Col>
-                            <CyrillicKeyboard disabled={ false
-                                                //his.state.selectedLanguage === 'english'
-                                              }
-                                              keyboardPressHandler={
-                                                this.handleCyrillicKeyboardClick
-                                              } />                            
-                        </Col>
-                    </Row>
-                    <Row>
                         <Col className="buttons__actions">
                             <Button variant="primary" 
+                                    type="submit"
                                     disabled={this.state.englishInput === '' ||
                                               this.state.cyrillicInput === ''}
                                     className="button__action">
