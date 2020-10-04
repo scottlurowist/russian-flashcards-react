@@ -83,7 +83,7 @@ class ViewFlashcardsView extends Component {
                 this.flashcards[this.flashcardNumberCurrentlyShown].russianWord)) {
 
                 this.displayStatusMessageMethod(
-                    `Correct: | ${this.state.englishInput} | is | ${this.state.cyrillicInput} |.` +
+                    `Correct: < ${this.state.englishInput} > is < ${this.state.cyrillicInput} >.` +
                     " Change the input language and/or select 'Next'");
                 
                 this.setState( {
@@ -94,7 +94,13 @@ class ViewFlashcardsView extends Component {
         }
         else {
             this.displayStatusMessageMethod(
-                "Your answer is not correct. Please try again.");             
+                "Your answer is not correct. Please try again or select 'Next'."); 
+                
+                this.setState( {
+                    checkButtonDisabled: false,
+                    nextButtonDisabled: false,
+                    radioButtonsDisabled: true    
+                });                
         }
     }; 
     
@@ -109,8 +115,19 @@ class ViewFlashcardsView extends Component {
     // 
     handleCyrillicKeyboardClick = cyrillicCharacter => {
         
+        let newCyrillicInput ;
+
+        // If we received the backspace character, then simply remove the 
+        // last character from the existing russian word. Otherwise,
+        // suffix the new character to the end of the input.
+        if (cyrillicCharacter === 'назад') {
+            newCyrillicInput = this.state.cyrillicInput.slice(0, -1);
+        }
+        else {
+            newCyrillicInput = this.state.cyrillicInput + cyrillicCharacter;
+        }
         this.setState({
-            cyrillicInput: this.state.cyrillicInput + cyrillicCharacter,
+            cyrillicInput: newCyrillicInput,
             checkButtonDisabled: this.shouldCheckButtonBeDisabled()
         });
     };
@@ -228,6 +245,14 @@ class ViewFlashcardsView extends Component {
                 await this.dataModel.getAllFlashcards(store.user.token);
 
             this.flashcards = response.data.flashcards;
+
+            if (this.flashcards.length === 0) {
+                
+                this.displayStatusMessageMethod(
+                    "There are no flashcards. You must create at least one flashcard to view them");
+                    
+                return;    
+            }
            
             this.flashcardNumberCurrentlyShown = 0;    
 
@@ -345,7 +370,8 @@ class ViewFlashcardsView extends Component {
                                 <Form.Label className="text-danger">
                                     русский
                                 </Form.Label>
-                                <Form.Control type="text" placeholder='русский'
+                                <Form.Control type="text" 
+                                              placeholder='русский'
                                               disabled={
                                                   this.state.selectedLanguage === 'english'
                                               }

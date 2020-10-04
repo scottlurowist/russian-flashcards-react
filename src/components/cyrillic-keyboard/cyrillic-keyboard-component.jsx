@@ -138,8 +138,8 @@ const CyrillicKeyboard = ({disabled, keyboardPressHandler}) => {
                 <Button onClick={e => keyboardPressHandler(e.target.textContent)}
                         variant="danger"
                         disabled={disabled}
-                        className="cyrillic__button enter-key ">
-                    вход
+                        className="cyrillic__button backspace-key ">
+                    назад
                 </Button>
             </div>    
             { /* The final row of our Cyrillic soft keyboard. */}

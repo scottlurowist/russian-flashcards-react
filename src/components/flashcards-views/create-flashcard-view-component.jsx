@@ -32,7 +32,8 @@ class CreateFlashcardView extends Component {
 
         this.state = {
             cyrillicInput: '',
-            englishInput: ''
+            englishInput: '',
+            disableCyrillicKeyboard: true
         };
 
         this.history = history;
@@ -63,7 +64,12 @@ class CreateFlashcardView extends Component {
 
             this.displayStatusMessageMethod(
                 `The flashcard  - ${this.state.englishInput} / 
-                ${this.state.cyrillicInput} -  was created successfully`);        
+                ${this.state.cyrillicInput} -  was created successfully`);       
+                
+            this.setState({
+                englishInput: '',
+                cyrillicInput: ''
+            });    
         }
         catch(exception) {
             this.displayStatusMessageMethod(exception.message);
@@ -80,10 +86,32 @@ class CreateFlashcardView extends Component {
     //                     component.
     // 
     handleCyrillicKeyboardClick = cyrillicCharacter => {
+
+        let newCyrillicInput ;
+
+        // If we received the backspace character, then simply remove the 
+        // last character from the existing russian word. Otherwise,
+        // suffix the new character to the end of the input.
+        if (cyrillicCharacter === 'назад') {
+            newCyrillicInput = this.state.cyrillicInput.slice(0, -1);
+        }
+        else {
+            newCyrillicInput = this.state.cyrillicInput + cyrillicCharacter;
+        }
         this.setState({
-            cyrillicInput: this.state.cyrillicInput + cyrillicCharacter
+            cyrillicInput: newCyrillicInput,
         });
     };
+
+
+    // This is a do-nothing handler for the Cyrillic keyboard. Because that
+    // keyboard is a softkeyboard, it does not raise an onChange event.
+    // But React wants an onChange event otherwise we receive this error in the
+    // JS console: Warning: Failed prop type: You provided a `value` prop to a
+    // form field without an `onChange` handler. This will render a read-only
+    // field. If the field should be mutable use `defaultValue`. Otherwise, set
+    // either `onChange` or `readOnly`.
+    handleEmptyCyrillicOnChange = () => {};   
 
 
     // Handles changes in the English input text control.
@@ -95,6 +123,34 @@ class CreateFlashcardView extends Component {
             englishInput: event.target.value
         });
     };
+
+
+    handleOnBlur = event => {
+
+        let controlName = event.target.name;
+        let keyboardDisableState;
+        
+        if (controlName === "english") keyboardDisableState = false;
+        else keyboardDisableState = true;
+
+        this.setState({
+            disableCyrillicKeyboard: keyboardDisableState
+        });
+    };
+
+
+    handleOnFocus = event => {
+    
+        let controlName = event.target.name;
+        let keyboardDisableState;
+
+        if (controlName === "english") keyboardDisableState = true;
+        else keyboardDisableState = false;
+
+        this.setState({ 
+            disableCyrillicKeyboard: keyboardDisableState
+        })
+    };   
 
 
     // A React.js lifecycle method that renders the component.
@@ -114,9 +170,12 @@ class CreateFlashcardView extends Component {
                                               disabled={ false
                                                   //this.state.selectedLanguage === 'russian'
                                               }
+                                              name="english"
                                               onChange={
                                                   this.handleEnglishKeyboardChange
                                               }
+                                              onBlur={ this.handleOnBlur }
+                                              onFocus={ this.handleOnFocus }                                               
                                               value={this.state.englishInput}
                                               placeholder='English' />
                             </Form.Group> 
@@ -127,17 +186,18 @@ class CreateFlashcardView extends Component {
                                     русский
                                 </Form.Label>
                                 <Form.Control type="text" placeholder='русский'
-                                              disabled={ false
-                                                  //this.state.selectedLanguage === 'english'
-                                              }
+                                              disabled={ false }
+                                              name="russian"
+                                              onChange={this.handleEmptyCyrillicOnChange}
+                                              onFocus={ this.handleOnFocus }
                                               value={this.state.cyrillicInput}/>                                           
                             </Form.Group>
                         </Col>                                                   
                     </Row>
                     <Row>
                         <Col>
-                            <CyrillicKeyboard disabled={ false
-                                                //his.state.selectedLanguage === 'english'
+                            <CyrillicKeyboard disabled={ 
+                                                this.state.disableCyrillicKeyboard
                                               }
                                               keyboardPressHandler={
                                                 this.handleCyrillicKeyboardClick

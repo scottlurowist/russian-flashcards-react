@@ -26,7 +26,7 @@ class HomeView extends React.Component {
 
     constructor({displayStatusMessageMethod, history}) {
         super();
-        console.log(history)
+
         this.history = history;
         this.displayStatusMessageMethod = displayStatusMessageMethod;
     }

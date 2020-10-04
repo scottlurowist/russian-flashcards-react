@@ -15,7 +15,7 @@ form {
 }
 
 .form--centered {
-    margin: 0 auto 2rem auto;
+    margin: 0 auto 1.5rem auto;
 }
 
 
@@ -40,15 +40,16 @@ form {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     overflow: auto;
-    height: 9rem;
-    margin-bottom: 2rem;
+    height: 8.5rem;
+    margin-bottom: 1rem;
 }
 
 .flashcard {
     margin: 1rem;
-    border: .1rem solid red;
+    border: .2rem solid red;
     border-radius: 1rem;
-    padding: 1rem;
+    padding: .4rem;
 }

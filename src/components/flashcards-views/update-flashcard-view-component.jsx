@@ -73,16 +73,28 @@ class UpdateFlashcardView extends Component {
     //                     component.
     // 
     handleCyrillicKeyboardClick = cyrillicCharacter => {
+        
+        let newCyrillicInput ;
+
+        // If we received the backspace character, then simply remove the 
+        // last character from the existing russian word. Otherwise,
+        // suffix the new character to the end of the input.
+        if (cyrillicCharacter === 'назад') {
+            newCyrillicInput = this.state.cyrillicInput.slice(0, -1);
+        }
+        else {
+            newCyrillicInput = this.state.cyrillicInput + cyrillicCharacter;
+        }
         this.setState({
-            cyrillicInput: this.state.cyrillicInput + cyrillicCharacter
+            cyrillicInput: newCyrillicInput,
         });
     };
 
 
     // This is a do-nothing handler for the Cyrillic keyboard. Because that
     // keyboard is a softkeyboard, it does not raise an onChange event.
-    // But React wants an onChange event other we get this error in the JS
-    // console: Warning: Failed prop type: You provided a `value` prop to a
+    // But React wants an onChange event otherwise we receive this error in the
+    // JS console: Warning: Failed prop type: You provided a `value` prop to a
     // form field without an `onChange` handler. This will render a read-only
     // field. If the field should be mutable use `defaultValue`. Otherwise, set
     // either `onChange` or `readOnly`.
@@ -129,16 +141,31 @@ class UpdateFlashcardView extends Component {
         });
     };
 
+
     handleOnBlur = event => {
+
+        let controlName = event.target.name;
+        let keyboardDisableState;
+        
+        if (controlName === "english") keyboardDisableState = false;
+        else keyboardDisableState = true;
+
         this.setState({
-            disableCyrillicKeyboard: false
+            disableCyrillicKeyboard: keyboardDisableState
         });
     };
 
 
     handleOnFocus = event => {
+
+        let controlName = event.target.name;
+        let keyboardDisableState;
+
+        if (controlName === "english") keyboardDisableState = true;
+        else keyboardDisableState = false;
+
         this.setState({ 
-            disableCyrillicKeyboard: true
+            disableCyrillicKeyboard: keyboardDisableState
         })
     };
 
@@ -230,6 +257,7 @@ class UpdateFlashcardView extends Component {
                                 </Form.Label>
                                 <Form.Control type="text" 
                                               disabled={ false }
+                                              name="english"
                                               onChange={
                                                   this.handleEnglishKeyboardChange
                                               }
@@ -246,6 +274,8 @@ class UpdateFlashcardView extends Component {
                                 </Form.Label>
                                 <Form.Control type="text" placeholder='русский'
                                               disabled={ false }
+                                              name="russian"
+                                              onFocus={ this.handleOnFocus }    
                                               onChange={ this.handleEmptyCyrillicOnChange }
                                               value={this.state.cyrillicInput}/>                                           
                             </Form.Group>

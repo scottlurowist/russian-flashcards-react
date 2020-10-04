@@ -98,7 +98,7 @@ class SigninView extends React.Component {
 
         return (
             <section className="input__controls">
-                <Form onSubmit={this.handleSubmit}>
+                <Form className="auth-form" onSubmit={this.handleSubmit}>
                     <Row>
                         <Col>
                             <Form.Group controlId="email-text" >
