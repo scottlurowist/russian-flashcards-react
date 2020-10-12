@@ -1,6 +1,6 @@
 let apiUrl
 const apiUrls = {
-  production: ' https://russian-flashcards-webapi.herokuapp.com/',
+  production: ' https://russian-flashcards-webapi.herokuapp.com',
   development: 'http://localhost:4741'
 }
 
