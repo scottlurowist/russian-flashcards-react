@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/russian-flashcards-react/static/css/main.faf4bb85.chunk.css",
+    "main.js": "/russian-flashcards-react/static/js/main.a0842c19.chunk.js",
+    "main.js.map": "/russian-flashcards-react/static/js/main.a0842c19.chunk.js.map",
+    "runtime-main.js": "/russian-flashcards-react/static/js/runtime-main.269a2335.js",
+    "runtime-main.js.map": "/russian-flashcards-react/static/js/runtime-main.269a2335.js.map",
+    "static/js/2.9b1f8ea8.chunk.js": "/russian-flashcards-react/static/js/2.9b1f8ea8.chunk.js",
+    "static/js/2.9b1f8ea8.chunk.js.map": "/russian-flashcards-react/static/js/2.9b1f8ea8.chunk.js.map",
+    "index.html": "/russian-flashcards-react/index.html",
+    "precache-manifest.7fec957e1848864c7ca438ab7f566425.js": "/russian-flashcards-react/precache-manifest.7fec957e1848864c7ca438ab7f566425.js",
+    "service-worker.js": "/russian-flashcards-react/service-worker.js",
+    "static/css/main.faf4bb85.chunk.css.map": "/russian-flashcards-react/static/css/main.faf4bb85.chunk.css.map",
+    "static/js/2.9b1f8ea8.chunk.js.LICENSE.txt": "/russian-flashcards-react/static/js/2.9b1f8ea8.chunk.js.LICENSE.txt",
+    "static/media/St.Basils_Cathedral_Moscow.jpg": "/russian-flashcards-react/static/media/St.Basils_Cathedral_Moscow.03b322f3.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.269a2335.js",
+    "static/js/2.9b1f8ea8.chunk.js",
+    "static/css/main.faf4bb85.chunk.css",
+    "static/js/main.a0842c19.chunk.js"
+  ]
+}
